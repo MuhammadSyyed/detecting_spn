@@ -3,13 +3,14 @@ import streamlit as st
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
+from datetime import datetime
 from PIL import Image
 
 # =====================
 # CONFIG
 # =====================
 CLASS_NAMES = ["benign", "malignant", "normal"]
-MODEL_PATH = "spn_classifier.pth"  # your saved state_dict
+MODEL_PATH = "./models/spn_classifier.pth"  # your saved state_dict
 
 # =====================
 # RECREATE MODEL & LOAD WEIGHTS
@@ -61,5 +62,11 @@ if uploaded_file is not None:
         outputs = model(img_tensor)
         _, predicted = torch.max(outputs, 1)
         predicted_class = CLASS_NAMES[predicted.item()]
+
+
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_{uploaded_file.name}_{predicted_class}.jpg"
+    image.save(f"./uploaded_images/{filename}")
 
     st.markdown(f"### 🏷 Prediction: **{predicted_class.upper()}**")
