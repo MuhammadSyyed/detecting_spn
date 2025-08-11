@@ -46,7 +46,7 @@ transform = transforms.Compose([
 # STREAMLIT UI
 # =====================
 st.title("🩻 SPN Classification App")
-st.write("Upload a lung CT scan image and the model will predict if it's **Benign**, **Malignant**, or **Normal**.")
+st.write("Upload a lung CT scan image and the model will predict if it's **Benign**, **Malignant**.")
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
